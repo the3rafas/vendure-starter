@@ -15,6 +15,7 @@
     "migration:revert": "ts-node migration revert"
   },
   "dependencies": {
+    "@nestjs/graphql": "^10.2.0",
     "@vendure/admin-ui-plugin": "2.0.6",
     "@vendure/asset-server-plugin": "2.0.6",
     "@vendure/core": "2.0.6",

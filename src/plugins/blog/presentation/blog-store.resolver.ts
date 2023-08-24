@@ -11,16 +11,15 @@ import { BlogService } from "../blog.service";
 import { Asset, Ctx, RequestContext } from "@vendure/core";
 import { PaginateBlog } from "./input/filter-blog.input";
 import { FindBlogInput } from "./input/find-blog.input";
-import { Loader } from "../../_common/decorators/dataloader";
-import { IDataLoaders } from "../../_common/dataloader/dataloader.interface";
-import { UtilsService } from "src/plugins/utils/utils.service";
-import { UtilsLoaderService } from "src/plugins/utils/utils.loader.service";
+import { UtilsService } from "../..//utils/utils.service";
+import { UtilsLoaderService } from "../..//utils/utils.loader.service";
 
 @Resolver(Blog)
 export class BlogStoreResolver {
-  constructor(private blogService: BlogService,
+  constructor(
+    private blogService: BlogService,
     private utils: UtilsLoaderService
-    ) {}
+  ) {}
 
   @Query((type) => [Blog])
   Blogs(@Args("input") input: PaginateBlog) {
@@ -33,9 +32,11 @@ export class BlogStoreResolver {
   }
 
   @ResolveField((type) => Asset, { nullable: true })
-  async assets(@Parent() blog: Blog, @Loader() loaders: IDataLoaders) {
-    console.log(await this.utils.assets);
+  assets(@Parent() blog: Blog) {
+    const { assets } = this.utils.getLoader();
+    assets.load(blog.id);
 
     return null;
+    // return assets.load(blog.id);
   }
 }

@@ -26,7 +26,6 @@ export class BlogService {
     private blogRepo: BlogRepository,
     private translateSaver: TranslatableSaver,
     private channelService: ChannelService,
-    private listQueryBuilder: ListQueryBuilder,
     private assetService: AssetService,
     private utils: UtilsService
   ) {}
@@ -41,9 +40,9 @@ export class BlogService {
       entityType: Blog,
       input,
       translationType: BlogTranslation,
-      beforeSave: async (p) => {
-        await this.channelService.assignToCurrentChannel(p, ctx);
-        await this.assetService.updateFeaturedAsset(ctx, p, input);
+      beforeSave: async (blog) => {
+        await this.channelService.assignToCurrentChannel(blog, ctx);
+        await this.assetService.updateFeaturedAsset(ctx, blog, input);
       },
     });
     await this.assetService.updateEntityAssets(ctx, blog, input);
@@ -72,5 +71,4 @@ export class BlogService {
     if (!blog) throw new InternalServerError("Blog Does Not Exist");
     return await this.blogRepo.delete(blogId);
   }
-  
 }

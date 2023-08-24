@@ -8,7 +8,13 @@ import {
   TransactionalConnection,
 } from "@vendure/core";
 import { Injectable } from "@nestjs/common";
-import { In, FindOptionsWhere, EntityTarget, ObjectLiteral } from "typeorm";
+import {
+  In,
+  FindOptionsWhere,
+  FindOptionsOrder,
+  EntityTarget,
+  ObjectLiteral,
+} from "typeorm";
 import { CustomerRepository } from "./infrastructure/user.repository";
 
 @Injectable()
@@ -63,7 +69,8 @@ export class UtilsService {
     relations: string[] = [],
     where: FindOptionsWhere<Entity> = {},
     page: number = 0,
-    limit: number = 15
+    limit: number = 15,
+    sort: FindOptionsOrder<Entity> = {}
   ) {
     let take = limit;
     if (page <= 1) page = 0;
@@ -75,7 +82,7 @@ export class UtilsService {
         skip,
         take,
         order: {
-          createdAt: "DESC",
+          ...(sort ? sort : { createdAt: "DESC" }),
         },
         where: {
           translations: {

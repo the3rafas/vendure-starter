@@ -9,7 +9,7 @@ export class DataloaderService implements IDataLoaderService {
 
   createLoaders(): IDataLoaders {
     return {
-      ...this.assetLoader.createLoaders(),
+      // ...this.assetLoader.createLoaders(),
     };
   }
 }

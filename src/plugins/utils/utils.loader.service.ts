@@ -1,17 +1,12 @@
 import {
-  Customer,
+  Asset,
   CustomerService,
-  ForbiddenError,
   ID,
-  InternalServerError,
-  LanguageCode,
-  RequestContext,
   TransactionalConnection,
 } from "@vendure/core";
 import { Injectable } from "@nestjs/common";
-import { In, FindOptionsWhere, EntityTarget, ObjectLiteral } from "typeorm";
 import { CustomerRepository } from "./infrastructure/user.repository";
-const { DataLoader } = require("dataloader");
+const DataLoader = require("dataloader");
 @Injectable()
 export class UtilsLoaderService {
   constructor(
@@ -20,14 +15,15 @@ export class UtilsLoaderService {
     private connection: TransactionalConnection
   ) {}
 
-  async assets(ids: ID[]) {
-    return new DataLoader(
-      async (blogId: ID[]) => await this.findAssetByIds(blogId)
-    );
+  getLoader() {
+    return {
+      assets: new DataLoader(
+        async (keys: ID[]) => await this.getAssetsByBlogId(keys)
+      ),
+    };
   }
-
-  private findAssetByIds(blogId: ID[]) {
+  private async getAssetsByBlogId(blogId: ID[]) {
     console.log(blogId);
-    return null;
+    return [null];
   }
 }

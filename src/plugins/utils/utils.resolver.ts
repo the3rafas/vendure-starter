@@ -14,8 +14,6 @@ import {
   Transaction,
 } from "@vendure/core";
 import { UtilsService } from "./utils.service";
-import { Loader } from "../_common/decorators/dataloader";
-import { IDataLoaders } from "../_common/dataloader/dataloader.interface";
 
 @Resolver(Product)
 export class UtilsResolver {
@@ -25,9 +23,7 @@ export class UtilsResolver {
   async isFav(
     @Parent() parent: Product,
     @Ctx() ctx: RequestContext,
-    @Loader() loader: IDataLoaders
   ) {
-    loader
     if (!ctx?.activeUserId) {
       return false;
     }

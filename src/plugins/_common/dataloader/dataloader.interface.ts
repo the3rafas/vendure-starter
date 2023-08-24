@@ -4,5 +4,5 @@ export interface IDataLoaderService {
   createLoaders(): any;
 }
 export interface IDataLoaders {
-  assetLoader: AssetLoaderType;
+  // assetLoader: AssetLoaderType;
 }

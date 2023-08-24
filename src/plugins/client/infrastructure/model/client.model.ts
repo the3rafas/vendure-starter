@@ -1,9 +1,7 @@
 import { DeepPartial } from "@vendure/common/lib/shared-types";
 import {
   Channel,
-  Translated,
   Translation,
-  PaginatedList,
   VendureEntity,
 } from "@vendure/core";
 import { Column, Entity, OneToMany, ManyToMany, JoinTable } from "typeorm";

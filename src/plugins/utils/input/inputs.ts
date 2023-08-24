@@ -9,10 +9,8 @@ export class LanguageInput {
 
 @InputType()
 export class PaginationInput {
-  @Field(() => Number, { nullable: true })
-  limit: number;
-  @Field(() => Number, { nullable: true })
-  page: number;
+  limit: number = 15;
+  page: number = 0;
 }
 
 export type Maybe<T> = T | null;

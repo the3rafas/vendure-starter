@@ -22,6 +22,17 @@ import { BlogPlugin } from "./plugins/blog/blog.module";
 import { ProductPlugin } from "./plugins/product/product.module";
 import { TokenActiveOrderStrategy } from "./plugins/_common/vendure/order.strategy";
 import { ProjectPlugin } from "./plugins/project/project.module";
+import { BannerPlugin } from "./plugins/banner/banner.module";
+import {
+  Create_Project,
+  Delete_Project,
+  update_Project,
+} from "./plugins/project/presentation/project.permission";
+import {
+  Create_Banner,
+  Delete_Banner,
+  Update_Banner,
+} from "./plugins/banner/presentation/banner.permission";
 
 const IS_DEV = process.env.APP_ENV === "dev";
 
@@ -55,7 +66,17 @@ export const config: VendureConfig = {
     cookieOptions: {
       secret: process.env.COOKIE_SECRET,
     },
-    customPermissions: [Create_Blog, update_Blog, Delete_Blog],
+    customPermissions: [
+      Create_Blog,
+      update_Blog,
+      Delete_Blog,
+      Create_Project,
+      update_Project,
+      Delete_Project,
+      Create_Banner,
+      Update_Banner,
+      Delete_Banner,
+    ],
   },
   dbConnectionOptions: {
     type: "postgres",
@@ -138,5 +159,6 @@ export const config: VendureConfig = {
     BlogPlugin,
     ProductPlugin,
     ProjectPlugin,
+    BannerPlugin,
   ],
 };

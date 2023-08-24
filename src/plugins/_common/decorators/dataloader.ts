@@ -8,6 +8,6 @@ import { BlogLoader } from "../../blog/presentation/dataloader/blog.loader";
 export const Loader = createParamDecorator<IDataLoaders>(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest() as RequestContext;
-    return new DataloaderService(BlogLoader as any).createLoaders();
+    // return new DataloaderService(BlogLoader as any).createLoaders();
   }
 );
